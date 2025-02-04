@@ -1,4 +1,4 @@
-#include "include/byte-manipulator.hpp"
+// #include "include/byte-manipulator.hpp"
 #include <cstdint>
 #include <cstring>
 #include <iostream>
@@ -43,25 +43,26 @@ void reverseArray(uint8_t *array, size_t arrSize) {
    }
 }
 
+void writeToBuf(int data, uint8_t *buf, size_t size, int bufPos) {
+   buf[bufPos] = data >> 8;
+   buf[bufPos + 1] = data & 0xFF;
+}
+
 int main() {
-   uint8_t temp = back_left_thruster >> 8;
-   uint8_t thruster[8] = {
-       (uint8_t)back_left_thruster,
-       temp,
-   };
-   reverseArray(thruster, std::size(thruster));
+   uint8_t buffer[8];
 
-   for (size_t i = 0; i < std::size(thruster); i++) {
-      std::cout << "thruster value at index " << i << ": " << static_cast<uint>(thruster[i]) << std::endl;
+   for (size_t i = 0; i < std::size(buffer); i++) {
+      std::cout << "buffer value at index " << i << ": " << (uint)buffer[i] << std::endl;
    }
-   std::cout << "thruster size: " << std::size(thruster) << std::endl;
+   std::cout << "buffer size: " << std::size(buffer) << std::endl;
 
-   // int thrusterLen = sizeof(thruster);
-   uint a = thruster[6];
-   uint b = thruster[7];
+   // int bufferLen = sizeof(buffer);
+   uint a = buffer[6];
+   uint b = buffer[7];
    a = a << 8;
 
    int res = a | b;
    std::cout << "real result is: " << res << std::endl;
+   std::cout << "size of one of the thruster is: " << sizeof(back_left_thruster) << std::endl;
    return 0;
 }
