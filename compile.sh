@@ -2,4 +2,5 @@
 
 cmake -B build .
 cmake --build build
-./build/send
+# ./build/send
+./build/bytemanipulate
